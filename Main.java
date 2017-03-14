@@ -50,7 +50,7 @@ public class Main {
     /// Program startup function.
     public static void main(String[] args) {
         boolean text = false;
-        String testFile = "testNum.txt";
+        String testFile = "/home/cbastion/ecs170/proj3/Female/5_2_1.txt";
 
         // Parse through the command line arguements
         try {
@@ -58,8 +58,8 @@ public class Main {
             while (i < args.length) {
                 if (args[i].equalsIgnoreCase("-train")) {
                     text = true;
-                    HelloWorld myHello = new HelloWorld();
-                    myHello.hello();
+                    //HelloWorld myHello = new HelloWorld();
+                    //myHello.hello();
                     openFile(testFile);
                     // Compensate for i += 2
                     i--;
