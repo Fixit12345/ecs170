@@ -19,7 +19,7 @@ public class Main {
         System.out.println("Note: Later command-line options override earlier ones if they are incompatable\n");
     }
 
-    public void openFile(String filename) {
+    public static void openFile(String filename) {
         List < Integer > list = new ArrayList < Integer > ();
         File file = new File(filename);
         BufferedReader reader = null;
@@ -50,6 +50,7 @@ public class Main {
     /// Program startup function.
     public static void main(String[] args) {
         boolean text = false;
+        String testFile = "testNum.txt";
 
         // Parse through the command line arguements
         try {
@@ -59,6 +60,7 @@ public class Main {
                     text = true;
                     HelloWorld myHello = new HelloWorld();
                     myHello.hello();
+                    openFile(testFile);
                     // Compensate for i += 2
                     i--;
                 } else if (args[i].equalsIgnoreCase("-test")) {
