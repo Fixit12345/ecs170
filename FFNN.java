@@ -4,12 +4,12 @@ public class FFNN {
 	public static int OutputNuerons = 1;
 	
 	
-	public int inputs[] = new int[InputNuerons];
-	public int hiddens[] = new int[HiddenNuerons];
-	public int Outputs[] = new int[OutputNuerons];
+	public double inputs[] = new double[InputNuerons];
+	public double hiddens[] = new double[HiddenNuerons];
+	public double outputs[] = new double[OutputNuerons];
 	
-	public int weightsOutToHidden[] = new int[OutputNuerons][HiddenNuerons];
-	public int weightsHiddenToIn[] = new int[HiddenNuerons][InputNuerons];
+	public double weightsOutToHidden[][] = new double[OutputNuerons][HiddenNuerons];
+	public double weightsHiddenToIn[][] = new double[HiddenNuerons][InputNuerons];
 	
 	public double learningRate = 0.2;
 	public double prediction = 0;
@@ -33,33 +33,33 @@ public class FFNN {
 			for (int i = 0; i < OutputNuerons; i++){
 				//for each hidden ouput node pair, add value
 				for (int j = 0; j < HiddenNuerons; j++){
-					Outputs[i] = Outputs[i] + (weightsOutToHiddenn[i][j] * hiddens[j]);
+					outputs[i] = outputs[i] + (weightsOutToHidden[i][j] * hiddens[j]);
 				}
 				//sigmoid value after all hiddens applied
-				Outputs[i] = 1/ (1 + Math.exp(-Outputs[i]));
+				outputs[i] = 1/ (1 + Math.exp(-outputs[i]));
 			}
 			
 		}
 	
 	//use calculated error to appoint proportioal error and update weights accordingly
 	public void backProp(){
-			double hiddenError;
+			double hiddenError[] = new double[HiddenNuerons];
 			
 			//total output layer error
 			for(int ole = 0; ole < OutputNuerons; ole++){
-				outputError = (prediction - Outputs[ole]) * ((Outputs[ole])*(1 - Outputs[ole]));
+				outputError = (prediction - outputs[ole]) * ((outputs[ole])*(1 - outputs[ole]));
 			}
 			
 			//total hidden layer error
 			for(int hle = 0; hle < HiddenNuerons; hle++){
 				hiddenError[hle] = 0;
 				
-				//add error of output nodes
+				//add error inheritted output nodes
 				for(int ole = 0; ole < OutputNuerons; ole++){
 					//weight error
-					hiddenError[hle] += outputError  * weightsOutToHidden[ole][hle];
+					hiddenError[hle] = hiddenError[hle] + outputError  * weightsOutToHidden[ole][hle];
 					//derive error
-					hiddenError[hle] = hiddenError[hle]] * (hiddenError[hle]*(1-hiddenError[hle]));
+					hiddenError[hle] = hiddenError[hle] * (hiddenError[hle]*(1-hiddenError[hle]));
 				}
 			}
 		
@@ -81,7 +81,21 @@ public class FFNN {
 			
 		}
 	
-	public void computeErr(){}
+	public void randomWeights(){
+		//initialzie the weights of the output neurons and hidden neurons
+		for(int i = 0; i < OutputNuerons; i++){
+			for(int j = 0; j < HiddenNuerons; j++){
+				weightsOutToHidden[i][j] = Math.random();
+			}
+		}
+		
+		//initialzie the weights of the hidden neurons and input neurons
+		for(int i = 0; i < HiddenNuerons; i++){
+			for(int j = 0; j < InputNuerons; j++){
+				weightsHiddenToIn[i][j] = Math.random();
+			}
+		}
+	}
 	
 	public void gradOuttoHidden(){}
 	
