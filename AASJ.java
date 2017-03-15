@@ -67,16 +67,19 @@ public class AASJ {
 					}
                     //openFile(temp);
                     // Compensate for i += 2
-                    i = i + 3;
+                    i = i + 2;
                 } else if (args[i].equalsIgnoreCase("-test")) {
                     helpPrinter();
                     System.exit(0);
+                    i++;
                 } else if (args[i].equalsIgnoreCase("--help")) {
                     helpPrinter();
                     System.exit(0);
-                } else
+                    i++;
+                } else {
                     throw new IllegalArgumentException();
-                i += 2;
+				}
+				i++;
             }
         }
         /*catch(ClassNotFoundException cnf)
