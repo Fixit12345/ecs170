@@ -14,11 +14,13 @@ public class FFNN {
 	public double weightsOutToHidden[][] = new double[OutputNuerons][HiddenNuerons];
 	public double weightsHiddenToIn[][] = new double[HiddenNuerons][InputNuerons];
 	
-	public double learningRate = 0.2;
+	public double learningRate = 0.3;
 	public double prediction = 0;
 	public double outputError = 0;
 	
-	public FFNN(){}
+	public FFNN(){
+		randomWeights();
+	}
 	
 	//returns prediction based on input to the network
 	public void forwardProp(){
@@ -50,8 +52,9 @@ public class FFNN {
 			
 			//total output layer error
 			for(int ole = 0; ole < OutputNuerons; ole++){
-				outputError = (prediction - outputs[ole]) * ((outputs[ole])*(1 - outputs[ole]));
+				outputError = prediction - outputs[ole];// * ((outputs[ole])*(1 - outputs[ole]));
 			}
+			
 			
 			//total hidden layer error
 			for(int hle = 0; hle < HiddenNuerons; hle++){
@@ -124,14 +127,16 @@ public class FFNN {
 		//run forwardProp
 		//then backProp
 		
-		randomWeights();
+		
 		for(String dFile: dirFiles){
 			openFile(dir + "/" + dFile);
+			
+			Arrays.fill(hiddens, 0.0);
 			
 			forwardProp();
 			backProp();
 			
-			printPerformance();
+			//printPerformance();
 		}
 	}
 	
@@ -145,12 +150,30 @@ public class FFNN {
         myDir = new File(dir);
         dirFiles = myDir.list();
         
+        
 		//for every filename in our training data
 		//we should scan the data into our input nodes
 		//run forwardProp
 		//then backProp
+		
+		
 		for(String dFile: dirFiles){
-			System.out.println(dFile);
+			openFile(dir + "/" + dFile);
+			
+			Arrays.fill(hiddens, 0.0);
+			
+			forwardProp();
+			
+			if(outputs[0] > .5){
+				System.out.println(dFile + " FEMALE " + outputs[0]);
+			} else {
+				System.out.println(dFile + " MALE " + outputs[0]);
+			}
+			
+			//System.out.println(dFile);
+			//System.out.println(outputs[0]);
+			
+			//printPerformance();
 		}
 	}
 	
@@ -175,9 +198,9 @@ public class FFNN {
     }
     
     public void printPerformance(){
-		System.out.println("The correct output should be: " + prediction);
-		System.out.println("The networks seems to think this is the asnswer: " + outputs[0]);
-		System.out.println("The error of the network seems to be: " + outputError);
+		//System.out.println("The correct output should be: " + prediction);
+		//System.out.println("The networks seems to think this is the asnswer: " + outputs[0]);
+		//System.out.println("The error of the network seems to be: " + outputError);
 	}
 
 }

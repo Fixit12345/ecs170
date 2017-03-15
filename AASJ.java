@@ -26,7 +26,7 @@ public class AASJ {
                 if (args[i].equalsIgnoreCase("-train")) {
                     
                     myNN.train(args[i + 1]);
-                    //myNN.train(args[i + 2]);
+                    myNN.train(args[i + 2]);
                     
                     i = i + 2;
                 } else if (args[i].equalsIgnoreCase("-test")) {
