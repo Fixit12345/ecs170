@@ -20,7 +20,7 @@ public static String shuffle(String s)
 
 public void foldCrossValidation(String data){
   int dataSize = length(data);
-  int foldSize = ceiling(dataSize / 5);
+  int foldSize = Math.ceil(dataSize / 5);
   String f1,f2,f3,f4,f5, datacopy;
 
   // shuffle data so we can randomly assign it to fold
@@ -36,7 +36,7 @@ public void foldCrossValidation(String data){
 	/*
 		for each of the folds, take all the other folds and combine them into a big one,
 		run train on the big one and test the little one. 
- */
+ 	*/
 
 	String bigFold1,bigFold2,bigFold3,bigFold4,bigFold5;
 
