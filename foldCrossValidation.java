@@ -21,14 +21,17 @@ public static String shuffle(String s)
 public void foldCrossValidation(String data[]){
   int dataSize = length(data);
   int foldSize = ceiling(dataSize / 5);
-  int lastfoldSize = dataSize - 4*foldSize;
+  //int lastfoldSize = dataSize - 4*foldSize;
   int j;
 
-  char[] f1 = new char[foldSize];
+/*  char[] f1 = new char[foldSize];
   char[] f2 = new char[foldSize];
   char[] f3 = new char[foldSize];
   char[] f4 = new char[foldSize];
   char[] f5 = new char[lastfoldSize];
+*/
+
+  String f1,f2,f3,f4,f5;
 
   // shuffle data so we can randomly assign it to fold
   shuffle(data);
@@ -37,25 +40,31 @@ public void foldCrossValidation(String data[]){
   randomly distribute data into 5 evenly sized string arrays
   */
 
-	for(j = 0; j < foldSize; j++){
-		f1[j] = data[j];
-	}
+  f1 = data.substring(0,foldSize);
+  f2 = data.substring(foldSize,2*foldSize);
+  f3 = data.substring(2*foldSize,3*foldSize);
+  f4 = data.substring(3*foldSize,4*foldSize);
+  f5 = data.substring(4*foldSize,dataSize);
 
-	for(j = foldSize; j < 2*foldSize; j++){
-		f2[j] = data[j];
-	}
+	// for(j = 0; j < foldSize; j++){
+	// 	f1[j] = data[j];
+	// }
 
-	for(j = 2*foldSize; j < 3*foldSize; j++){
-		f3[j] = data[j];
-	}
+	// for(j = foldSize; j < 2*foldSize; j++){
+	// 	f2[j] = data[j];
+	// }
 
-	for(j = 3*foldSize; j < 4*foldSize; j++){
-		f4[j] = data[j];
-	}
+	// for(j = 2*foldSize; j < 3*foldSize; j++){
+	// 	f3[j] = data[j];
+	// }
 
-	for(j = 4*foldSize; j < dataSize; j++){
-		f5[j] = data[j];
-	}
+	// for(j = 3*foldSize; j < 4*foldSize; j++){
+	// 	f4[j] = data[j];
+	// }
+
+	// for(j = 4*foldSize; j < dataSize; j++){
+	// 	f5[j] = data[j];
+	// }
 
 	/*
 
@@ -64,30 +73,31 @@ public void foldCrossValidation(String data[]){
 
  */
 
-
+	String bigFold1,bigFold2,bigFold3,bigFold4,bigFold5;
 	//f1
-	char[] bigFold1 = new char[foldSize*3 + lastfoldSize];
-	train(String(bigFold1));
-	test(String(f1));
+	bigFold1 = substring(foldSize, dataSize);
+	train(bigFold1);
+	test(f1);
 
 	//f2
-	char[] bigFold2 = new char[foldSize*3 + lastfoldSize];
-	train(String(bigFold2));
-	test(String(f2));
+	bigFold2 = substring(0, foldSize) + substring(2*foldSize,dataSize);
+	train(bigFold2);
+	test(f2);
+
 	//f3
-	char[] bigFold3 = new char[foldSize*3 + lastfoldSize];
-	train(String(bigFold3));
-	test(String(f3));
+	bigFold3 = substring(0, 2*foldSize) + substring(3*foldSize,dataSize);
+	train(bigFold3);
+	test(f3);
 
 	//f4
-	char[] bigFold4 = new char[foldSize*3 + lastfoldSize];
-	train(String(bigFold4));
-	test(String(f4));
+	bigFold4 = substring(0, 3*foldSize) + substring(4*foldSize,dataSize);
+	train(bigFold4);
+	test(f4);
 
 	//f5
-	char[] bigFold5 = new char[foldSize*4];
-	train(String(bigFold5));
-	test(String(f5));
+	bigFold5 = substring(0, 4*dataSize);
+	train(bigFold5);
+	test(f5);
 
 	return;
 }
