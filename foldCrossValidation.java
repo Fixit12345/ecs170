@@ -21,7 +21,7 @@ public static String shuffle(String s)
 public void foldCrossValidation(String data){
   int dataSize = length(data);
   int foldSize = Math.ceil(dataSize / 5);
-  String f1,f2,f3,f4,f5, datacopy;
+  String f1,f2,f3,f4,f5;
 
   // shuffle data so we can randomly assign it to fold
   data = shuffle(data);
