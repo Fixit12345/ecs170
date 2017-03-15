@@ -49,18 +49,24 @@ public class Main {
 
     /// Program startup function.
     public static void main(String[] args) {
-        boolean text = false;
-        String testFile = "/home/cbastion/ecs170/proj3/Female/5_2_1.txt";
+        String[] dirFiles;
+        File myDir = null;
+        File tFile = null;
+        int cont = 0;
 
         // Parse through the command line arguements
         try {
             int i = 0;
             while (i < args.length) {
                 if (args[i].equalsIgnoreCase("-train")) {
-                    text = true;
-                    //HelloWorld myHello = new HelloWorld();
-                    //myHello.hello();
-                    openFile(testFile);
+                    myDir = new File("Female");
+                    //store the names of files in myDir as String[]
+                    dirFiles = myDir.list();
+                    for(String f:dirFiles) {
+						// prints filename and directory name
+						System.out.println(f);
+					}
+                    //openFile(temp);
                     // Compensate for i += 2
                     i--;
                 } else if (args[i].equalsIgnoreCase("-test")) {
