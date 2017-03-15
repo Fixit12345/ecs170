@@ -175,8 +175,8 @@ public class FFNN {
     }
     
     public void printPerformance(){
-		System.out.println("The prediction of the network seems to be: " + prediction);
-		System.out.println("The outputs[0] seems to be: " + outputs[0]);
+		System.out.println("The correct output should be: " + prediction);
+		System.out.println("The networks seems to think this is the asnswer: " + outputs[0]);
 		System.out.println("The error of the network seems to be: " + outputError);
 	}
 
