@@ -31,10 +31,10 @@ public void foldCrossValidation(String data[]){
   char[] f5 = new char[lastfoldSize];
 */
 
-  String f1,f2,f3,f4,f5;
+  String f1,f2,f3,f4,f5, datacopy;
 
   // shuffle data so we can randomly assign it to fold
-  shuffle(data);
+  data = shuffle(data);
 
   /*
   randomly distribute data into 5 evenly sized string arrays
