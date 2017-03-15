@@ -52,7 +52,31 @@ public class FFNN {
 			
 			//total hidden layer error
 			for(int hle = 0; hle < HiddenNuerons; hle++){
-				outputError = (prediction - Outputs[ole]) * ((Outputs[ole])*(1 - Outputs[ole]));
+				hiddenError[hle] = 0;
+				
+				//add error of output nodes
+				for(int ole = 0; ole < OutputNuerons; ole++){
+					//weight error
+					hiddenError[hle] += outputError  * weightsOutToHidden[ole][hle];
+					//derive error
+					hiddenError[hle] = hiddenError[hle]] * (hiddenError[hle]*(1-hiddenError[hle]));
+				}
+			}
+		
+			//adjust the weights from the hidden to output layer
+			for(int ole = 0; ole < OutputNuerons; ole++){
+				for(int hle = 0; hle < HiddenNuerons; hle++){
+					weightsOutToHidden[ole][hle] = weightsOutToHidden[ole][hle] + learningRate * 
+						outputError * hiddenError[hle];
+				}
+			}
+		
+			//adjust the weights from the input to hidden layer
+			for(int hle = 0; hle < HiddenNuerons; hle++){
+				for(int ile = 0; ile < InputNuerons; ile++){
+					weightsHiddenToIn[hle][ile] = weightsHiddenToIn[hle][ile] + learningRate * 
+						hiddenError[hle] * inputs[ile];
+				}
 			}
 			
 		}
