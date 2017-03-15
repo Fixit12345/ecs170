@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class FFNN {
 	public static int InputNuerons = 15360; //128 * 120
 	public static int HiddenNuerons = 20; //deviced arbitarilaly
@@ -81,6 +84,7 @@ public class FFNN {
 			
 		}
 	
+	//randomize the weights to initalize the network
 	public void randomWeights(){
 		//initialzie the weights of the output neurons and hidden neurons
 		for(int i = 0; i < OutputNuerons; i++){
@@ -97,18 +101,83 @@ public class FFNN {
 		}
 	}
 	
-	public void gradOuttoHidden(){}
+	//trains network based on data given
+	public void train(String dir){
+		
+		String[] dirFiles;
+        File myDir = null;
+        File tFile = null;
+        
+        myDir = new File(dir);
+        dirFiles = myDir.list();
+        
+        if(dir.equals("Female")){
+			prediction = 1;
+		}
+		
+		if(dir.equals("Male")){
+			prediction = 0;
+		}
+        
+		//for every filename in our training data
+		//we should scan the data into our input nodes
+		//run forwardProp
+		//then backProp
+		
+		randomWeights();
+		for(String dFile: dirFiles){
+			openFile(dir + "/" + dFile);
+			
+			forwardProp();
+			backProp();
+			
+			printPerformance();
+		}
+	}
 	
-	public void gradHiddentoIn(){}
+	//test network prediction performance agaisnt given data
+	public void test(String dir){
+		
+		String[] dirFiles;
+        File myDir = null;
+        File tFile = null;
+        
+        myDir = new File(dir);
+        dirFiles = myDir.list();
+        
+		//for every filename in our training data
+		//we should scan the data into our input nodes
+		//run forwardProp
+		//then backProp
+		for(String dFile: dirFiles){
+			System.out.println(dFile);
+		}
+	}
 	
-	public void updatWeights(){}
-	
-	public void train(){}
-	
-	public void test(){}
-
+	public void openFile(String filename) {
+		//System.out.println(filename);
+		try{
+		Scanner scanner = new Scanner(new File(filename));
+		int i = 0;
+		while(scanner.hasNextInt())
+		{
+			inputs[i++] = scanner.nextInt();
+		}
+		
+		} catch (FileNotFoundException nf) {
+            System.err.println("FileNotFound: " + nf.getMessage());
+            System.exit(6);
+		}
+	}
+		
     public void hello(){
         System.out.println("Hello, World");
     }
+    
+    public void printPerformance(){
+		System.out.println("The prediction of the network seems to be: " + prediction);
+		System.out.println("The outputs[0] seems to be: " + outputs[0]);
+		System.out.println("The error of the network seems to be: " + outputError);
+	}
 
 }
