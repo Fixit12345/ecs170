@@ -18,62 +18,28 @@ public static String shuffle(String s)
   return shuffled;
 }
 
-public void foldCrossValidation(String data[]){
+public void foldCrossValidation(String data){
   int dataSize = length(data);
   int foldSize = ceiling(dataSize / 5);
-  //int lastfoldSize = dataSize - 4*foldSize;
-  int j;
-
-/*  char[] f1 = new char[foldSize];
-  char[] f2 = new char[foldSize];
-  char[] f3 = new char[foldSize];
-  char[] f4 = new char[foldSize];
-  char[] f5 = new char[lastfoldSize];
-*/
-
   String f1,f2,f3,f4,f5, datacopy;
 
   // shuffle data so we can randomly assign it to fold
   data = shuffle(data);
 
-  /*
-  randomly distribute data into 5 evenly sized string arrays
-  */
-
+  // randomly distribute data into 5 evenly sized string arrays  
   f1 = data.substring(0,foldSize);
   f2 = data.substring(foldSize,2*foldSize);
   f3 = data.substring(2*foldSize,3*foldSize);
   f4 = data.substring(3*foldSize,4*foldSize);
   f5 = data.substring(4*foldSize,dataSize);
 
-	// for(j = 0; j < foldSize; j++){
-	// 	f1[j] = data[j];
-	// }
-
-	// for(j = foldSize; j < 2*foldSize; j++){
-	// 	f2[j] = data[j];
-	// }
-
-	// for(j = 2*foldSize; j < 3*foldSize; j++){
-	// 	f3[j] = data[j];
-	// }
-
-	// for(j = 3*foldSize; j < 4*foldSize; j++){
-	// 	f4[j] = data[j];
-	// }
-
-	// for(j = 4*foldSize; j < dataSize; j++){
-	// 	f5[j] = data[j];
-	// }
-
 	/*
-
 		for each of the folds, take all the other folds and combine them into a big one,
 		run train on the big one and test the little one. 
-
  */
 
 	String bigFold1,bigFold2,bigFold3,bigFold4,bigFold5;
+
 	//f1
 	bigFold1 = substring(foldSize, dataSize);
 	train(bigFold1);
