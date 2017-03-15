@@ -18,7 +18,7 @@ public static String shuffle(String s)
   return shuffled;
 }
 
-public void foldCossValidation(String data[]){
+public void foldCrossValidation(String data[]){
   int dataSize = length(data);
   int foldSize = ceiling(dataSize / 5);
   int lastfoldSize = dataSize - 4*foldSize;
@@ -67,28 +67,27 @@ public void foldCossValidation(String data[]){
 
 	//f1
 	char[] bigFold1 = new char[foldSize*3 + lastfoldSize];
-	train(bigFold1);
-	test(f1);
+	train(String(bigFold1));
+	test(String(f1));
 
 	//f2
 	char[] bigFold2 = new char[foldSize*3 + lastfoldSize];
-	train(bigFold2);
-	test(f2);
-
+	train(String(bigFold2));
+	test(String(f2));
 	//f3
 	char[] bigFold3 = new char[foldSize*3 + lastfoldSize];
-	train(bigFold3);
-	test(f3);
+	train(String(bigFold3));
+	test(String(f3));
 
 	//f4
 	char[] bigFold4 = new char[foldSize*3 + lastfoldSize];
-	train(bigFold4);
-	test(f4);
+	train(String(bigFold4));
+	test(String(f4));
 
 	//f5
 	char[] bigFold5 = new char[foldSize*4];
-	train(bigFold5);
-	test(f5);
+	train(String(bigFold5));
+	test(String(f5));
 
 	return;
 }
