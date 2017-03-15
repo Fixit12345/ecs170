@@ -14,8 +14,7 @@ public class Main {
     public static void helpPrinter() {
         System.out.println("  Command Line Parameters are as follows:");
         System.out.println("    \"--help\" : You're looking at it");
-        System.out.println("    \"-p1 [AI Class Name]\" : Set player 1 to the appropriate AI");
-        System.out.println("      Example: -p1 StupidAI");
+        System.out.println("    \"-Please make format such java AASJ -train dir dir");
         System.out.println("Note: Later command-line options override earlier ones if they are incompatable\n");
     }
 
